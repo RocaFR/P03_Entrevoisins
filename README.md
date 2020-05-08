@@ -1,3 +1,5 @@
-# OpenClassrooms
+# P3 Développez une nouvelle fonctionnalité pour l'app Entrevoisins
 
-Ce dépôt contient une mini-application pour le P3 du parcours **Grande École du Numérique**.
+[Lien du projet](https://openclassrooms.com/fr/projects/605/assignment)
+
+**Soutenance le 17/05/2020**
