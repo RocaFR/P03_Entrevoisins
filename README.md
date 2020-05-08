@@ -1,4 +1,5 @@
-# P3 Développez une nouvelle fonctionnalité pour l'app Entrevoisins
+# P03_Entrevoisins
+### Développez une nouvelle fonctionnalité pour l'app Entrevoisins
 
 [Lien du projet](https://openclassrooms.com/fr/projects/605/assignment)
 
