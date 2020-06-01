@@ -2,17 +2,22 @@ package com.openclassrooms.entrevoisins.ui.neighbour_list;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.openclassrooms.entrevoisins.R;
 import com.openclassrooms.entrevoisins.di.DI;
 import com.openclassrooms.entrevoisins.model.Neighbour;
+import com.openclassrooms.entrevoisins.service.FavoritesNeighboursApiService;
 import com.openclassrooms.entrevoisins.service.NeighbourApiService;
 
 import java.util.List;
@@ -22,9 +27,11 @@ import butterknife.ButterKnife;
 
 public class UserActivity extends AppCompatActivity {
 
+    // Api
     private Neighbour mNeighbour;
     private List<Neighbour> mNeighbourList;
     private NeighbourApiService mApiService;
+    private FavoritesNeighboursApiService mFavoritesNeighboursApiService;
 
     // UI
     @BindView(R.id.imageview_neighbour_photo)
@@ -41,6 +48,8 @@ public class UserActivity extends AppCompatActivity {
     TextView mNeighbourFacebook;
     @BindView(R.id.text_view_neighbour_about_description)
     TextView mNeighbourDescription;
+    @BindView(R.id.add_neighbour_to_fav)
+    FloatingActionButton mButtonAddToFav;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,10 +58,12 @@ public class UserActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         mApiService = DI.getNeighbourApiService();
+        mFavoritesNeighboursApiService = DI.getFavoriteNeighbourApiService();
 
         this.initList();
         this.getNeighbourByID();
         this.updateUI();
+        this.setOnClickOnFavButton();
     }
 
     /**
@@ -64,20 +75,28 @@ public class UserActivity extends AppCompatActivity {
         ActivityCompat.startActivity(pActivity, intent, null);
     }
 
+    /**
+     * Get the list of neighbours
+     */
     private void initList() {
         mNeighbourList = mApiService.getNeighbours();
     }
 
+    /**
+     * Fetch neighbour form previous activty to neighbourlist
+     */
     private void getNeighbourByID() {
         long id = getIntent().getLongExtra(NeighbourFragment.KEY_USER_ID, 0);
         for (Neighbour neighbour : mNeighbourList) {
             if (neighbour.getId() == id) {
                 mNeighbour = neighbour;
-                Log.d("UserActivity", "getNeighbourByID: " + neighbour.getName());
             }
         }
     }
 
+    /**
+     * Update all the UI components
+     */
     private void updateUI() {
         Glide.with(this).load(mNeighbour.getAvatarUrl()).into(mNeighbourPhoto);
         mNeighbourName.setText(mNeighbour.getName());
@@ -87,4 +106,17 @@ public class UserActivity extends AppCompatActivity {
         mNeighbourFacebook.setText(mNeighbour.getAvatarUrl());
         mNeighbourDescription.setText(mNeighbour.getAboutMe());
     }
+
+    private void setOnClickOnFavButton() {
+        mButtonAddToFav.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View pView) {
+                mFavoritesNeighboursApiService.createFavoriteNeighbour(mNeighbour);
+                for (Neighbour neighbour : mFavoritesNeighboursApiService.getFavoritesNeighbours()) {
+                    System.out.println(neighbour.getName());
+                }
+            }
+        });
+    }
+
 }

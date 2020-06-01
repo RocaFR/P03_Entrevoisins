@@ -13,6 +13,4 @@
     <string name="neighbour_facebook_url">www.facebook.com/caroline</string>
     <string name="about_me_description">A propos de moi</string>
     <string name="activity_user_textview_about">Bonjour ! Je souhaiterai faire de la marche nordique. Pas iniitée, je recherche une ou plusieurs personnes susceptiobles de m\'accompagner. J\'aime bien les jeux de cartes tels la belote ou le tarot...</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

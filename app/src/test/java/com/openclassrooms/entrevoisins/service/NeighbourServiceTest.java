@@ -38,6 +38,14 @@ public class NeighbourServiceTest {
     }
 
     @Test
+    public void createNeighbourWithSuccess() {
+        List<Neighbour> neighbourList= service.getNeighbours();
+        Neighbour newNeighbour = new Neighbour(2020,"Mathieu", "https://i.pravatar.cc/150?u=a042581f4e29026704d","Saint-Pierre-du-Mont ; 5km","+33 6 86 57 90 14","Coucou");
+        service.createNeighbour(newNeighbour);
+        assertTrue(service.getNeighbours().contains(newNeighbour));
+    }
+
+    @Test
     public void deleteNeighbourWithSuccess() {
         Neighbour neighbourToDelete = service.getNeighbours().get(0);
         service.deleteNeighbour(neighbourToDelete);
