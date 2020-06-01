@@ -40,7 +40,6 @@ public class AddNeighbourActivity extends AppCompatActivity {
     MaterialButton addButton;
 
     private NeighbourApiService mApiService;
-    private FavoritesNeighboursApiService mFavoritesNeighboursApiService;
     private String mNeighbourImage;
 
     @Override
