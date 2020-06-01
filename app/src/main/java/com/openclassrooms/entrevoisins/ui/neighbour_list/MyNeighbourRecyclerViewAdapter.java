@@ -51,6 +51,7 @@ public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeigh
                 EventBus.getDefault().post(new DeleteNeighbourEvent(neighbour));
             }
         });
+
     }
 
     @Override
@@ -70,5 +71,9 @@ public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeigh
             super(view);
             ButterKnife.bind(this, view);
         }
+    }
+
+    public Neighbour getUser(int position) {
+        return this.mNeighbours.get(position);
     }
 }

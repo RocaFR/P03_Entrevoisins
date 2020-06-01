@@ -8,8 +8,10 @@
     android:background="#ededed">
 
     <ImageView
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         android:id="@+id/imageview_neighbour_photo"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="300dp"
         android:contentDescription="@string/photo_of_the_neighbour"
         android:scaleType="centerCrop"
@@ -30,14 +32,16 @@
 
 
     <android.support.design.widget.FloatingActionButton
+        app:elevation="16dp"
         android:id="@+id/add_neighbour_to_fav"
         android:layout_width="wrap_content"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_margin="@dimen/fab_margin"
         android:tint="@color/colorFavButton"
         app:backgroundTint="@android:color/white"
-        app:layout_constraintBottom_toBottomOf="@+id/imageview_neighbour_photo"
-        app:layout_constraintEnd_toEndOf="@+id/imageview_neighbour_photo"
+        app:layout_constraintTop_toBottomOf="@+id/imageview_neighbour_photo"
+        app:layout_constraintBottom_toBottomOf="@id/imageview_neighbour_photo"
+        app:layout_constraintEnd_toEndOf="@id/imageview_neighbour_photo"
         app:srcCompat="@drawable/ic_star_white_24dp" />
 
     <android.support.constraint.ConstraintLayout
