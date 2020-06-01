@@ -9,7 +9,7 @@ import java.util.List;
  * 01/06/20
  * Author Bryan Ferreras-Roca
  */
-class DummyFavoritesNeighboursApiService implements FavoritesNeighboursApiService {
+public class DummyFavoritesNeighboursApiService implements FavoritesNeighboursApiService {
     private List<Neighbour> favoritesNeighboursList = DummyNeighbourGenerator.generateFavoritesNeighbours();
 
     @Override

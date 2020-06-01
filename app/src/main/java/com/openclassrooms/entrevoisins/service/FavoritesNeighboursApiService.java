@@ -5,11 +5,17 @@ import com.openclassrooms.entrevoisins.model.Neighbour;
 import java.util.List;
 
 /**
+
+import com.openclassrooms.entrevoisins.model.Neighbour;
+
+import java.util.List;
+
+/**
  * Entrevoisins - com.openclassrooms.entrevoisins.service
  * 01/06/20
  * Author Bryan Ferreras-Roca
  */
-interface FavoritesNeighboursApiService {
+public interface FavoritesNeighboursApiService {
     /**
      * Get all my Favorites Neighbours
      * @return {@link List}
