@@ -12,7 +12,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.openclassrooms.entrevoisins.R;
 import com.openclassrooms.entrevoisins.di.DI;
-import com.openclassrooms.entrevoisins.events.AddNeighbourToFavEvent;
+import com.openclassrooms.entrevoisins.events.DeleteNeighbourFromFavEvent;
 import com.openclassrooms.entrevoisins.model.Neighbour;
 import com.openclassrooms.entrevoisins.service.FavoritesNeighboursApiService;
 
@@ -55,7 +55,7 @@ class MyFavoritesNeighboursRecyclerViewAdapter extends RecyclerView.Adapter<MyFa
         pViewHolder.mDeleteImageButton.setOnClickListener(new View.OnClickListener() {
             @Override //TODO Implémenter la suppression du favoris
             public void onClick(View pView) {
-                EventBus.getDefault().post(new AddNeighbourToFavEvent(neighbour));
+                EventBus.getDefault().post(new DeleteNeighbourFromFavEvent(neighbour));
             }
         });
     }

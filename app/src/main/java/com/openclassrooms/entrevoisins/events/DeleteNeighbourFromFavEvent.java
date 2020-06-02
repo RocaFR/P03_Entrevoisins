@@ -7,7 +7,7 @@ import com.openclassrooms.entrevoisins.model.Neighbour;
  * 02/06/20
  * Author Bryan Ferreras-Roca
  */
-public class AddNeighbourToFavEvent {
+public class DeleteNeighbourFromFavEvent {
     /**
      * Neighbour to add to favorites
      */
@@ -17,7 +17,7 @@ public class AddNeighbourToFavEvent {
      * Constructor of POJO
      * @param pNeighbour
      */
-    public AddNeighbourToFavEvent(Neighbour pNeighbour) {
+    public DeleteNeighbourFromFavEvent(Neighbour pNeighbour) {
         this.mNeighbour = pNeighbour;
     }
 

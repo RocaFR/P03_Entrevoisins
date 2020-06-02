@@ -132,10 +132,11 @@ public class UserActivity extends AppCompatActivity {
     private void configureFavButtonState() {
         List<Neighbour> favoritesList = mFavoritesNeighboursApiService.getFavoritesNeighbours();
         if (favoritesList.contains(mNeighbour)) {
+            mButtonAddToFav.setEnabled(false);
             mButtonAddToFav.getDrawable().mutate().setTint(getResources().getColor(R.color.colorFavButton));
         } else {
+            mButtonAddToFav.setEnabled(true);
             mButtonAddToFav.getDrawable().mutate().setTint(getResources().getColor(R.color.colorFavButtonFalse));
         }
     }
-
 }
