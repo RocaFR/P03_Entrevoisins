@@ -24,6 +24,7 @@ public class DummyFavoritesNeighboursApiService implements FavoritesNeighboursAp
 
     @Override
     public void createFavoriteNeighbour(Neighbour neighbour) {
+        //TODO Ne pas ajouter un neighbour déjà présent
         favoritesNeighboursList.add(neighbour);
     }
 }

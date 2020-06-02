@@ -2,6 +2,10 @@ package com.openclassrooms.entrevoisins.ui.neighbour_list;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -69,6 +73,7 @@ public class UserActivity extends AppCompatActivity {
         this.getNeighbourByID();
         this.updateUI();
         this.setOnClickOnFavButton();
+        this.configureFavButtonState();
     }
 
     /**
@@ -119,8 +124,18 @@ public class UserActivity extends AppCompatActivity {
                 mFavoritesNeighboursApiService.createFavoriteNeighbour(mNeighbour);
                 Snackbar.make(mConstraintLayout, R.string.snackbar_addToFav, Snackbar.LENGTH_SHORT)
                         .show();
+                configureFavButtonState();
             }
         });
+    }
+
+    private void configureFavButtonState() {
+        List<Neighbour> favoritesList = mFavoritesNeighboursApiService.getFavoritesNeighbours();
+        if (favoritesList.contains(mNeighbour)) {
+            mButtonAddToFav.getDrawable().mutate().setTint(getResources().getColor(R.color.colorFavButton));
+        } else {
+            mButtonAddToFav.getDrawable().mutate().setTint(getResources().getColor(R.color.colorFavButtonFalse));
+        }
     }
 
 }
