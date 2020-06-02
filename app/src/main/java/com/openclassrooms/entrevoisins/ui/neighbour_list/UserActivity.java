@@ -2,10 +2,13 @@ package com.openclassrooms.entrevoisins.ui.neighbour_list;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Html;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -34,6 +37,8 @@ public class UserActivity extends AppCompatActivity {
     private FavoritesNeighboursApiService mFavoritesNeighboursApiService;
 
     // UI
+    @BindView(R.id.user_activity_rootview)
+    ConstraintLayout mConstraintLayout;
     @BindView(R.id.imageview_neighbour_photo)
     ImageView mNeighbourPhoto;
     @BindView(R.id.textview_neighbour_name)
@@ -112,9 +117,8 @@ public class UserActivity extends AppCompatActivity {
             @Override
             public void onClick(View pView) {
                 mFavoritesNeighboursApiService.createFavoriteNeighbour(mNeighbour);
-                for (Neighbour neighbour : mFavoritesNeighboursApiService.getFavoritesNeighbours()) {
-                    System.out.println(neighbour.getName());
-                }
+                Snackbar.make(mConstraintLayout, R.string.snackbar_addToFav, Snackbar.LENGTH_SHORT)
+                        .show();
             }
         });
     }

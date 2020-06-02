@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.neighbour_list.UserActivity"
+    android:id="@+id/user_activity_rootview"
     android:background="#ededed">
 
     <ImageView

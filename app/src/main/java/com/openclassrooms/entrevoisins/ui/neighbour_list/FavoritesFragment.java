@@ -12,8 +12,12 @@ import android.view.ViewGroup;
 
 import com.openclassrooms.entrevoisins.R;
 import com.openclassrooms.entrevoisins.di.DI;
+import com.openclassrooms.entrevoisins.events.AddNeighbourToFavEvent;
 import com.openclassrooms.entrevoisins.model.Neighbour;
 import com.openclassrooms.entrevoisins.service.FavoritesNeighboursApiService;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.List;
 
@@ -30,6 +34,7 @@ public class FavoritesFragment extends Fragment {
     private FavoritesNeighboursApiService mFavoritesNeighboursApiService;
     private List<Neighbour> mFavoritesNeighbourList;
     private RecyclerView mRecyclerView;
+    MyFavoritesNeighboursRecyclerViewAdapter mAdapter;
 
     public FavoritesFragment() {
         // Required empty public constructor
@@ -44,7 +49,7 @@ public class FavoritesFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mFavoritesNeighboursApiService = DI.getFavoriteNeighbourApiService();
-        initList();
+        //initList();
     }
 
     @Override
@@ -53,10 +58,9 @@ public class FavoritesFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_favorites, container, false);
         Context context = view.getContext();
-        mRecyclerView = view.findViewById(R.id.list_favorites_neighbours);
-        MyFavoritesNeighboursRecyclerViewAdapter mAdapter = new MyFavoritesNeighboursRecyclerViewAdapter(mFavoritesNeighbourList);
+        mRecyclerView = (RecyclerView) view;
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
         return view;
     }
 
@@ -66,7 +70,26 @@ public class FavoritesFragment extends Fragment {
         initList();
     }
 
+    @Override
+    public void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
     private void initList() {
         mFavoritesNeighbourList = mFavoritesNeighboursApiService.getFavoritesNeighbours();
+        mRecyclerView.setAdapter(new MyFavoritesNeighboursRecyclerViewAdapter(mFavoritesNeighbourList));
+    }
+
+    @Subscribe
+    public void onAddNeighbourToFav(AddNeighbourToFavEvent pEvent) {
+        mFavoritesNeighboursApiService.deleteFavoriteNeighbour(pEvent.getNeighbour());
+        initList();
     }
 }

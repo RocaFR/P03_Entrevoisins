@@ -84,6 +84,7 @@ public class NeighbourFragment extends Fragment {
     @Override
     public void onStop() {
         super.onStop();
+
         EventBus.getDefault().unregister(this);
     }
 

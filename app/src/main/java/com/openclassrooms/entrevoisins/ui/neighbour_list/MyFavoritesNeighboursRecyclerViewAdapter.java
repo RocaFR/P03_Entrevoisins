@@ -12,8 +12,11 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.openclassrooms.entrevoisins.R;
 import com.openclassrooms.entrevoisins.di.DI;
+import com.openclassrooms.entrevoisins.events.AddNeighbourToFavEvent;
 import com.openclassrooms.entrevoisins.model.Neighbour;
 import com.openclassrooms.entrevoisins.service.FavoritesNeighboursApiService;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
@@ -48,10 +51,11 @@ class MyFavoritesNeighboursRecyclerViewAdapter extends RecyclerView.Adapter<MyFa
         Neighbour neighbour = mNeighbourList.get(pI);
         pViewHolder.mNeighbourName.setText(neighbour.getName());
         Glide.with(pViewHolder.mNeighbourAvatar.getContext()).load(neighbour.getAvatarUrl()).into(pViewHolder.mNeighbourAvatar);
+
         pViewHolder.mDeleteImageButton.setOnClickListener(new View.OnClickListener() {
-            @Override
+            @Override //TODO Implémenter la suppression du favoris
             public void onClick(View pView) {
-                mFavoritesNeighboursApiService.deleteFavoriteNeighbour(neighbour);
+                EventBus.getDefault().post(new AddNeighbourToFavEvent(neighbour));
             }
         });
     }
