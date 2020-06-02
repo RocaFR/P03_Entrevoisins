@@ -1,6 +1,7 @@
 package com.openclassrooms.entrevoisins.ui.neighbour_list;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DividerItemDecoration;
@@ -15,14 +16,12 @@ import com.openclassrooms.entrevoisins.di.DI;
 import com.openclassrooms.entrevoisins.events.AddNeighbourToFavEvent;
 import com.openclassrooms.entrevoisins.model.Neighbour;
 import com.openclassrooms.entrevoisins.service.FavoritesNeighboursApiService;
+import com.openclassrooms.entrevoisins.utils.ItemClickSupport;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
 import java.util.List;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -61,6 +60,7 @@ public class FavoritesFragment extends Fragment {
         mRecyclerView = (RecyclerView) view;
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
+        this.configureOnClickRecyclerView();
         return view;
     }
 
@@ -91,5 +91,17 @@ public class FavoritesFragment extends Fragment {
     public void onAddNeighbourToFav(AddNeighbourToFavEvent pEvent) {
         mFavoritesNeighboursApiService.deleteFavoriteNeighbour(pEvent.getNeighbour());
         initList();
+    }
+
+    private void configureOnClickRecyclerView() {
+        ItemClickSupport.addTo(mRecyclerView, R.layout.fragment_neighbour)
+                .setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
+                    @Override
+                    public void onItemClicked(RecyclerView recyclerView, int position, View v) {
+                        Intent intent = new Intent(getContext(), UserActivity.class);
+                        intent.putExtra(NeighbourFragment.KEY_USER_ID, mFavoritesNeighbourList.get(position).getId());
+                        startActivity(intent);
+                    }
+                });
     }
 }
