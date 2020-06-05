@@ -53,7 +53,7 @@ class MyFavoritesNeighboursRecyclerViewAdapter extends RecyclerView.Adapter<MyFa
         Glide.with(pViewHolder.mNeighbourAvatar.getContext()).load(neighbour.getAvatarUrl()).into(pViewHolder.mNeighbourAvatar);
 
         pViewHolder.mDeleteImageButton.setOnClickListener(new View.OnClickListener() {
-            @Override //TODO Implémenter la suppression du favoris
+            @Override
             public void onClick(View pView) {
                 EventBus.getDefault().post(new DeleteNeighbourFromFavEvent(neighbour));
             }
