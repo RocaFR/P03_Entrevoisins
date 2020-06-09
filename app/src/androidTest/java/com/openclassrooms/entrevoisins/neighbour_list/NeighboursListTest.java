@@ -148,7 +148,7 @@ public class NeighboursListTest {
                 .perform(ViewPagerActions.scrollRight());
         //TODO Implémenter le test de présence d'aucun item
         onView(withId(R.id.list_favorites_neighbours))
-                .check(matches(not(isDisplayed())));
+                .check(ViewAssertions.matches(not(withText(neighbourList.get(0).getName()))));
 
         onView(withId(R.id.container))
                 .perform(ViewPagerActions.scrollLeft());
@@ -169,5 +169,4 @@ public class NeighboursListTest {
                 .perform(RecyclerViewActions.scrollToPosition(0))
                 .check(matches(hasDescendant(withText(neighbourList.get(0).getName()))));
     }
-
 }

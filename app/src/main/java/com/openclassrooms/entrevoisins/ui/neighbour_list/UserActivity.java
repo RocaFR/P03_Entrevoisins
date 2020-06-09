@@ -93,7 +93,7 @@ public class UserActivity extends AppCompatActivity {
     }
 
     /**
-     * Fetch neighbour form previous activty to neighbourlist
+     * Fetch neighbour form previous activity to neighbourlist
      */
     private void getNeighbourByID() {
         long id = getIntent().getLongExtra(NeighbourFragment.KEY_USER_ID, 0);

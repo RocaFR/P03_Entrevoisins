@@ -17,6 +17,7 @@ import com.openclassrooms.entrevoisins.R;
 import com.openclassrooms.entrevoisins.di.DI;
 import com.openclassrooms.entrevoisins.events.DeleteNeighbourEvent;
 import com.openclassrooms.entrevoisins.model.Neighbour;
+import com.openclassrooms.entrevoisins.service.FavoritesNeighboursApiService;
 import com.openclassrooms.entrevoisins.service.NeighbourApiService;
 import com.openclassrooms.entrevoisins.utils.ItemClickSupport;
 
@@ -29,6 +30,7 @@ import java.util.List;
 public class NeighbourFragment extends Fragment {
 
     private NeighbourApiService mApiService;
+    private FavoritesNeighboursApiService mFavoritesNeighboursApiService;
     private List<Neighbour> mNeighbours;
     private RecyclerView mRecyclerView;
     public static final String KEY_USER_ID = "KEY_USER_ID";
@@ -47,6 +49,7 @@ public class NeighbourFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mApiService = DI.getNeighbourApiService();
+        mFavoritesNeighboursApiService = DI.getFavoriteNeighbourApiService();
     }
 
     @Override
@@ -95,6 +98,7 @@ public class NeighbourFragment extends Fragment {
     @Subscribe
     public void onDeleteNeighbour(DeleteNeighbourEvent event) {
         mApiService.deleteNeighbour(event.neighbour);
+        mFavoritesNeighboursApiService.deleteFavoriteNeighbour(event.neighbour);
         initList();
     }
 
