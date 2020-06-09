@@ -134,6 +134,7 @@ public class UserActivity extends AppCompatActivity {
         if (favoritesList.contains(mNeighbour)) {
             mButtonAddToFav.setEnabled(false);
             mButtonAddToFav.getDrawable().mutate().setTint(getResources().getColor(R.color.colorFavButton));
+            mButtonAddToFav.setElevation(16);
         } else {
             mButtonAddToFav.setEnabled(true);
             mButtonAddToFav.getDrawable().mutate().setTint(getResources().getColor(R.color.colorFavButtonFalse));

@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 
 import com.openclassrooms.entrevoisins.R;
 import com.openclassrooms.entrevoisins.di.DI;
+import com.openclassrooms.entrevoisins.events.DeleteNeighbourEvent;
 import com.openclassrooms.entrevoisins.events.DeleteNeighbourFromFavEvent;
 import com.openclassrooms.entrevoisins.model.Neighbour;
 import com.openclassrooms.entrevoisins.service.FavoritesNeighboursApiService;
@@ -98,6 +99,11 @@ public class FavoritesFragment extends Fragment {
     @Subscribe
     public void onAddNeighbourToFav(DeleteNeighbourFromFavEvent pEvent) {
         mFavoritesNeighboursApiService.deleteFavoriteNeighbour(pEvent.getNeighbour());
+        initList();
+    }
+
+    @Subscribe
+    public void onDeleteNeighbour(DeleteNeighbourEvent event) {
         initList();
     }
 

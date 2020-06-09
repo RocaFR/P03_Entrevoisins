@@ -65,6 +65,7 @@ public class NeighbourFragment extends Fragment {
         mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.fragment_neighbourlist_swipe_container);
         this.configureSwipeRefreshLayout();
         this.configureOnClickRecyclerView();
+
         return view;
     }
 
