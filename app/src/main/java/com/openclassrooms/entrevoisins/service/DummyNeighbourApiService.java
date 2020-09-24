@@ -1,5 +1,8 @@
 package com.openclassrooms.entrevoisins.service;
 
+import android.util.Log;
+
+import com.openclassrooms.entrevoisins.di.DI;
 import com.openclassrooms.entrevoisins.model.Neighbour;
 
 import java.util.List;
@@ -10,7 +13,6 @@ import java.util.List;
 public class DummyNeighbourApiService implements  NeighbourApiService {
 
     private List<Neighbour> neighbours = DummyNeighbourGenerator.generateNeighbours();
-
 
     /**
      * {@inheritDoc}

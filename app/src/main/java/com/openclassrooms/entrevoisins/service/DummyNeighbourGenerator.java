@@ -35,7 +35,13 @@ public abstract class DummyNeighbourGenerator {
                     "+33 6 86 57 90 14",  "Bonjour !Je souhaiterais faire de la marche nordique. Pas initiée, je recherche une ou plusieurs personnes susceptibles de m'accompagner !J'aime les jeux de cartes tels la belote et le tarot..")
     );
 
+    public static List<Neighbour> DUMMY_FAVORITES_NEIGHBOURS = Arrays.asList();
+
     static List<Neighbour> generateNeighbours() {
         return new ArrayList<>(DUMMY_NEIGHBOURS);
+    }
+
+    static List <Neighbour> generateFavoritesNeighbours() {
+        return new ArrayList<>(DUMMY_FAVORITES_NEIGHBOURS);
     }
 }
