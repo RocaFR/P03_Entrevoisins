@@ -146,7 +146,6 @@ public class NeighboursListTest {
         // On s'assure qu'il n'y a aucun favoris d'affiché pour le moment
         onView(withId(R.id.container))
                 .perform(ViewPagerActions.scrollRight());
-        //TODO Implémenter le test de présence d'aucun item
         onView(withId(R.id.list_favorites_neighbours))
                 .check(ViewAssertions.matches(not(withText(neighbourList.get(0).getName()))));
 
